@@ -1,131 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#0a0204" />
-  <title>6 Cartas ✨</title>
-  <link rel="preconnect" href__="https://fonts.googleapis.com" />
-  <link rel="preconnect" href__="https://fonts.gstatic.com" crossorigin />
-  <link href__="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href__="style.css" />
-</head>
-<body>
-  <!-- Partículas de fundo -->
-  <div class="particles" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
-    <span></span><span></span><span></span><span></span><span></span>
+<!-- Seção das cartas (leque) -->
+<section id="cardsSection" class="fan-area" aria-label="Leque de cartas">
+  <!-- Cada carta é um article com dados da carta -->
+  <article class="card card-1" data-index="0" style="--c-color: #1e90ff;">
+    <span class="card-symbol" aria-label="símbolo romance">♥️</span>
+  </article>
+  <article class="card card-2" data-index="1" style="--c-color: #00bcd4;">
+    <span class="card-symbol" aria-label="símbolo romance">♡</span>
+  </article>
+  <article class="card card-3" data-index="2" style="--c-color: #e53935;">
+    <span class="card-symbol" aria-label="símbolo romance">💋</span>
+  </article>
+  <article class="card card-4" data-index="3" style="--c-color: #8e24aa;">
+    <span class="card-symbol" aria-label="símbolo romance">✦</span>
+  </article>
+  <article class="card card-5" data-index="4" style="--c-color: #ff4d8a;">
+    <span class="card-symbol" aria-label="símbolo romance">✨</span>
+  </article>
+  <article class="card card-6" data-index="5" style="--c-color: #3f51b5;">
+    <span class="card-symbol" aria-label="símbolo romance">💙</span>
+  </article>
+</section>
+
+<!-- Tela da pergunta (oculta inicialmente) -->
+<section id="questionPanel" class="question-panel" aria-label="Pergunta de flerte" hidden>
+  <div class="card question-card" role="region" aria-label="Pergunta de flerte">
+    <div class="neon-label" aria-label="SUSPEITA NEON">SURPRESA ✨</div>
+    <h2 class="question-title">Cuidado...</h2>
+    <p id="questionText" class="question-text"></p>
+
+    <button id="waBtn" class="cta-whatsapp" aria-label="Enviar no WhatsApp">
+      💬 Enviar no WhatsApp
+    </button>
+
+    <button id="backBtn" class="back-btn" aria-label="Voltar às cartas">
+      ← Voltar às cartas
+    </button>
   </div>
-  <div class="glow-bg" aria-hidden="true"></div>
-
-  <!-- Controle de navegação somente com CSS -->
-  <input type="radio" name="nav" id="home" checked />
-  <input type="radio" name="nav" id="card1" />
-  <input type="radio" name="nav" id="card2" />
-  <input type="radio" name="nav" id="card3" />
-  <input type="radio" name="nav" id="card4" />
-  <input type="radio" name="nav" id="card5" />
-  <input type="radio" name="nav" id="card6" />
-
-  <main class="stage">
-
-    <!-- TELA PRINCIPAL: LEQUE DE CARTAS -->
-    <section class="screen cards-screen">
-      <h1 class="title">ESCOLHA UMA CARTA <span class="spark">✨</span></h1>
-      <p class="subtitle">Toque em uma carta e descubra o que ela esconde</p>
-
-      <div class="fan">
-        <label for="card1" class="card card--blue" style="--rot:-26deg;--z:1">
-          <span class="card-symbol">♡</span>
-          <span class="card-edge"></span>
-        </label>
-        <label for="card2" class="card card--cyan" style="--rot:-15deg;--z:2">
-          <span class="card-symbol">✦</span>
-          <span class="card-edge"></span>
-        </label>
-        <label for="card3" class="card card--red" style="--rot:-5deg;--z:3">
-          <span class="card-symbol">♥</span>
-          <span class="card-edge"></span>
-        </label>
-        <label for="card4" class="card card--purple" style="--rot:5deg;--z:4">
-          <span class="card-symbol">💋</span>
-          <span class="card-edge"></span>
-        </label>
-        <label for="card5" class="card card--pink" style="--rot:15deg;--z:3">
-          <span class="card-symbol">✨</span>
-          <span class="card-edge"></span>
-        </label>
-        <label for="card6" class="card card--violet" style="--rot:26deg;--z:2">
-          <span class="card-symbol">♡</span>
-          <span class="card-edge"></span>
-        </label>
-      </div>
-
-      <p class="hint">6 cartas · 6 segredos</p>
-    </section>
-
-    <!-- TELAS DE CONTEÚDO DAS CARTAS -->
-    <section class="screen content-screen content-1">
-      <div class="content-card">
-        <span class="tag">SURPRESA ✨</span>
-        <h2 class="content-title">Cuidado...</h2>
-        <p class="content-msg">Se eu te convidasse para sair comigo hoje, você aceitaria ou faria charme primeiro? 👀</p>
-        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
-        <label for="home" class="back">← Voltar às cartas</label>
-      </div>
-    </section>
-
-    <section class="screen content-screen content-2">
-      <div class="content-card">
-        <span class="tag">SURPRESA ✨</span>
-        <h2 class="content-title">Cuidado...</h2>
-        <p class="content-msg">Qual seria o lugar perfeito para um encontro comigo?</p>
-        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
-        <label for="home" class="back">← Voltar às cartas</label>
-      </div>
-    </section>
-
-    <section class="screen content-screen content-3">
-      <div class="content-card">
-        <span class="tag">SURPRESA ✨</span>
-        <h2 class="content-title">Cuidado...</h2>
-        <p class="content-msg">Se pudesse escolher uma coisa para fazer comigo agora, o que seria?</p>
-        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
-        <label for="home" class="back">← Voltar às cartas</label>
-      </div>
-    </section>
-
-    <section class="screen content-screen content-4">
-      <div class="content-card">
-        <span class="tag">SURPRESA ✨</span>
-        <h2 class="content-title">Cuidado...</h2>
-        <p class="content-msg">Qual foi a primeira coisa que você reparou em mim?</p>
-        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
-        <label for="home" class="back">← Voltar às cartas</label>
-      </div>
-    </section>
-
-    <section class="screen content-screen content-5">
-      <div class="content-card">
-        <span class="tag">SURPRESA ✨</span>
-        <h2 class="content-title">Cuidado...</h2>
-        <p class="content-msg">De 0 a 10, qual a chance de você aceitar um beijo meu? 💋</p>
-        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
-        <label for="home" class="back">← Voltar às cartas</label>
-      </div>
-    </section>
-
-    <section class="screen content-screen content-6">
-      <div class="content-card">
-        <span class="tag">SURPRESA ✨</span>
-        <h2 class="content-title">Cuidado...</h2>
-        <p class="content-msg">Se eu dissesse que estou com vontade de te ver agora... o que você responderia? ❤️</p>
-        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
-        <label for="home" class="back">← Voltar às cartas</label>
-      </div>
-    </section>
-
-  </main>
-</body>
-</html>
+</section>
