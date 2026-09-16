@@ -1,39 +1,119 @@
-<!-- Seção das cartas (leque) -->
-<section id="cardsSection" class="fan-area" aria-label="Leque de cartas">
-  <!-- Cada carta é um article com dados da carta -->
-  <article class="card card-1" data-index="0" style="--c-color: #1e90ff;">
-    <span class="card-symbol" aria-label="símbolo romance">♥️</span>
-  </article>
-  <article class="card card-2" data-index="1" style="--c-color: #00bcd4;">
-    <span class="card-symbol" aria-label="símbolo romance">♡</span>
-  </article>
-  <article class="card card-3" data-index="2" style="--c-color: #e53935;">
-    <span class="card-symbol" aria-label="símbolo romance">💋</span>
-  </article>
-  <article class="card card-4" data-index="3" style="--c-color: #8e24aa;">
-    <span class="card-symbol" aria-label="símbolo romance">✦</span>
-  </article>
-  <article class="card card-5" data-index="4" style="--c-color: #ff4d8a;">
-    <span class="card-symbol" aria-label="símbolo romance">✨</span>
-  </article>
-  <article class="card card-6" data-index="5" style="--c-color: #3f51b5;">
-    <span class="card-symbol" aria-label="símbolo romance">💙</span>
-  </article>
-</section>
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#100309" />
+    <meta name="description" content="6 Cartas — uma experiência romântica, misteriosa e cheia de flerte." />
+    <meta property="og:title" content="6 Cartas" />
+    <meta property="og:description" content="Escolha uma entre seis cartas românticas." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <title>6 Cartas — Escolha a sua</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="experience">
+      <input class="state-control" type="radio" name="card-state" id="home" checked />
+      <input class="state-control" type="radio" name="card-state" id="card-1" />
+      <input class="state-control" type="radio" name="card-state" id="card-2" />
+      <input class="state-control" type="radio" name="card-state" id="card-3" />
+      <input class="state-control" type="radio" name="card-state" id="card-4" />
+      <input class="state-control" type="radio" name="card-state" id="card-5" />
+      <input class="state-control" type="radio" name="card-state" id="card-6" />
 
-<!-- Tela da pergunta (oculta inicialmente) -->
-<section id="questionPanel" class="question-panel" aria-label="Pergunta de flerte" hidden>
-  <div class="card question-card" role="region" aria-label="Pergunta de flerte">
-    <div class="neon-label" aria-label="SUSPEITA NEON">SURPRESA ✨</div>
-    <h2 class="question-title">Cuidado...</h2>
-    <p id="questionText" class="question-text"></p>
+      <div class="particles" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
 
-    <button id="waBtn" class="cta-whatsapp" aria-label="Enviar no WhatsApp">
-      💬 Enviar no WhatsApp
-    </button>
+      <section class="chooser" aria-labelledby="choose-title">
+        <p class="brand">6 CARTAS</p>
+        <h1 id="choose-title">ESCOLHA UMA CARTA <span aria-hidden="true">✨</span></h1>
+        <p class="invitation">Uma delas guardou uma pergunta só para você.</p>
 
-    <button id="backBtn" class="back-btn" aria-label="Voltar às cartas">
-      ← Voltar às cartas
-    </button>
-  </div>
-</section>
+        <div class="deck" aria-label="Escolha uma das seis cartas">
+          <label class="love-card love-card-1" for="card-1" tabindex="0">
+            <span class="card-symbol">♡</span><span class="card-note">toque para revelar</span>
+          </label>
+          <label class="love-card love-card-2" for="card-2" tabindex="0">
+            <span class="card-symbol">✦</span><span class="card-note">toque para revelar</span>
+          </label>
+          <label class="love-card love-card-3" for="card-3" tabindex="0">
+            <span class="card-symbol">♥</span><span class="card-note">toque para revelar</span>
+          </label>
+          <label class="love-card love-card-4" for="card-4" tabindex="0">
+            <span class="card-symbol">✨</span><span class="card-note">toque para revelar</span>
+          </label>
+          <label class="love-card love-card-5" for="card-5" tabindex="0">
+            <span class="card-symbol">💋</span><span class="card-note">toque para revelar</span>
+          </label>
+          <label class="love-card love-card-6" for="card-6" tabindex="0">
+            <span class="card-symbol">♡</span><span class="card-note">toque para revelar</span>
+          </label>
+        </div>
+        <div class="scroll-cue" aria-hidden="true"><span></span></div>
+      </section>
+
+      <section class="reveal reveal-1" aria-labelledby="question-1">
+        <article class="question-card">
+          <span class="surprise">SURPRESA ✨</span><span class="heart" aria-hidden="true">♥</span>
+          <h2 id="question-1">Cuidado...</h2>
+          <p>Se eu te chamasse para sair comigo hoje, você aceitaria ou faria charme primeiro? 👀</p>
+          <a class="whatsapp" href="#" aria-label="Enviar resposta da carta 1 no WhatsApp">💬 <span>Enviar no WhatsApp</span></a>
+          <label class="back" for="home" tabindex="0">← Voltar às cartas</label>
+        </article>
+      </section>
+
+      <section class="reveal reveal-2" aria-labelledby="question-2">
+        <article class="question-card">
+          <span class="surprise">SURPRESA ✨</span><span class="heart" aria-hidden="true">♥</span>
+          <h2 id="question-2">Cuidado...</h2>
+          <p>Qual seria o lugar perfeito para um encontro comigo?</p>
+          <a class="whatsapp" href="#" aria-label="Enviar resposta da carta 2 no WhatsApp">💬 <span>Enviar no WhatsApp</span></a>
+          <label class="back" for="home" tabindex="0">← Voltar às cartas</label>
+        </article>
+      </section>
+
+      <section class="reveal reveal-3" aria-labelledby="question-3">
+        <article class="question-card">
+          <span class="surprise">SURPRESA ✨</span><span class="heart" aria-hidden="true">♥</span>
+          <h2 id="question-3">Cuidado...</h2>
+          <p>Se pudesse escolher uma coisa para fazer comigo agora, o que seria?</p>
+          <a class="whatsapp" href="#" aria-label="Enviar resposta da carta 3 no WhatsApp">💬 <span>Enviar no WhatsApp</span></a>
+          <label class="back" for="home" tabindex="0">← Voltar às cartas</label>
+        </article>
+      </section>
+
+      <section class="reveal reveal-4" aria-labelledby="question-4">
+        <article class="question-card">
+          <span class="surprise">SURPRESA ✨</span><span class="heart" aria-hidden="true">♥</span>
+          <h2 id="question-4">Cuidado...</h2>
+          <p>Qual foi a primeira coisa que você reparou em mim?</p>
+          <a class="whatsapp" href="#" aria-label="Enviar resposta da carta 4 no WhatsApp">💬 <span>Enviar no WhatsApp</span></a>
+          <label class="back" for="home" tabindex="0">← Voltar às cartas</label>
+        </article>
+      </section>
+
+      <section class="reveal reveal-5" aria-labelledby="question-5">
+        <article class="question-card">
+          <span class="surprise">SURPRESA ✨</span><span class="heart" aria-hidden="true">♥</span>
+          <h2 id="question-5">Cuidado...</h2>
+          <p>De 0 a 10, qual a chance de você aceitar um beijo meu? 💋</p>
+          <a class="whatsapp" href="#" aria-label="Enviar resposta da carta 5 no WhatsApp">💬 <span>Enviar no WhatsApp</span></a>
+          <label class="back" for="home" tabindex="0">← Voltar às cartas</label>
+        </article>
+      </section>
+
+      <section class="reveal reveal-6" aria-labelledby="question-6">
+        <article class="question-card">
+          <span class="surprise">SURPRESA ✨</span><span class="heart" aria-hidden="true">♥</span>
+          <h2 id="question-6">Cuidado...</h2>
+          <p>Se eu dissesse que estou com vontade de te ver agora... o que você responderia? ❤️</p>
+          <a class="whatsapp" href="#" aria-label="Enviar resposta da carta 6 no WhatsApp">💬 <span>Enviar no WhatsApp</span></a>
+          <label class="back" for="home" tabindex="0">← Voltar às cartas</label>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
