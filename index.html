@@ -2,478 +2,130 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>Leque dos Chavecos</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
-
-  <style>
-    :root {
-      --font-display: "Fredoka", system-ui, sans-serif;
-      --foreground: oklch(0.32 0.05 55);
-      --card: oklch(0.99 0.012 90);
-      --primary: oklch(0.66 0.19 25);
-      --muted-foreground: oklch(0.5 0.04 60);
-      --ring: oklch(0.7 0.12 30);
-      --shadow-charm:
-        0 10px 24px oklch(0.35 0.06 60 / 22%),
-        0 2px 6px oklch(0.35 0.06 60 / 15%);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      color: var(--foreground);
-    }
-
-    .game-page {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2.5rem 1rem;
-      overflow: hidden;
-      background: radial-gradient(
-        120% 90% at 50% 0%,
-        oklch(0.97 0.05 92) 0%,
-        oklch(0.95 0.04 84) 55%,
-        oklch(0.92 0.045 76) 100%
-      );
-    }
-
-    .game-title {
-      margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      font-weight: 600;
-      text-align: center;
-      color: var(--foreground);
-    }
-
-    .game-subtitle {
-      margin: 0.35rem 0 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      font-size: 0.95rem;
-      color: var(--muted-foreground);
-    }
-
-    .subtitle-flame {
-      --face: oklch(0.93 0.045 85);
-      --face-deep: var(--primary);
-      display: inline-flex;
-      width: 1.15rem;
-      height: 1.15rem;
-    }
-
-    .subtitle-flame svg {
-      width: 100%;
-      height: 100%;
-    }
-
-    .fan {
-      position: relative;
-      width: min(680px, 94vw);
-      height: 370px;
-      margin-top: 2.25rem;
-    }
-
-    .charm {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 150px;
-      height: 212px;
-      margin-left: -75px;
-      padding: 0;
-      border: 0;
-      background: transparent;
-      transform-origin: 50% -2px;
-      transform: rotate(var(--angle));
-      perspective: 1000px;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-      animation: fan-spread 0.8s cubic-bezier(0.3, 1.35, 0.55, 1) both;
-      animation-delay: calc(var(--i) * 70ms);
-    }
-
-    .charm:hover {
-      z-index: 10;
-    }
-
-    .charm:focus-visible {
-      outline: none;
-    }
-
-    .charm:focus-visible .flipper {
-      outline: 3px solid var(--ring);
-      outline-offset: 3px;
-      border-radius: 18px;
-    }
-
-    @keyframes fan-spread {
-      from {
-        transform: rotate(0deg);
-      }
-
-      to {
-        transform: rotate(var(--angle));
-      }
-    }
-
-    .flipper {
-      position: absolute;
-      inset: 0;
-      transform-style: preserve-3d;
-      transition:
-        transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1),
-        translate 0.25s ease;
-    }
-
-    .charm:hover .flipper,
-    .charm:focus-visible .flipper {
-      translate: 0 -10px;
-    }
-
-    .flipper.is-flipped {
-      transform: rotateY(180deg);
-    }
-
-    .face {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      border: 3px solid oklch(1 0 0 / 85%);
-      border-radius: 18px;
-      box-shadow: var(--shadow-charm);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .face-front {
-      background: var(--face);
-      color: var(--face-deep);
-    }
-
-    .drawing {
-      display: block;
-      width: 5.25rem;
-      height: 5.25rem;
-      filter: drop-shadow(0 3px 4px oklch(0.3 0.05 60 / 18%));
-    }
-
-    .drawing svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .icon-line {
-      fill: none;
-      stroke: var(--face-deep);
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .icon-line-bold {
-      stroke-width: 4;
-    }
-
-    .icon-fill {
-      fill: var(--face-deep);
-    }
-
-    .icon-fill-soft {
-      fill: oklch(1 0 0 / 45%);
-    }
-
-    .icon-cutout {
-      fill: var(--face);
-    }
-
-    .icon-cutout-line {
-      fill: none;
-      stroke: var(--face);
-      stroke-width: 3;
-      stroke-linecap: round;
-    }
-
-    .face-back {
-      transform: rotateY(180deg);
-      background: var(--card);
-      border-color: var(--face);
-    }
-
-    .back-message {
-      font-size: 0.85rem;
-      line-height: 1.35;
-      text-align: center;
-      color: oklch(from var(--foreground) l c h / 80%);
-    }
-
-    .charm-face-1 {
-      --face: oklch(0.93 0.1 95);
-      --face-deep: oklch(0.5 0.11 70);
-    }
-
-    .charm-face-2 {
-      --face: oklch(0.91 0.09 160);
-      --face-deep: oklch(0.48 0.1 160);
-    }
-
-    .charm-face-3 {
-      --face: oklch(0.9 0.075 18);
-      --face-deep: oklch(0.58 0.17 18);
-    }
-
-    .charm-face-4 {
-      --face: oklch(0.91 0.06 300);
-      --face-deep: oklch(0.52 0.13 300);
-    }
-
-    .charm-face-5 {
-      --face: oklch(0.91 0.06 230);
-      --face-deep: oklch(0.5 0.11 240);
-    }
-
-    .charm-face-6 {
-      --face: oklch(0.92 0.075 60);
-      --face-deep: oklch(0.55 0.13 50);
-    }
-
-    .game-footer {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    .game-count {
-      font-size: 0.9rem;
-      color: var(--muted-foreground);
-    }
-
-    @media (max-width: 560px) {
-      .game-page {
-        padding: 2rem 0.5rem;
-      }
-
-      .fan {
-        height: 290px;
-        margin-top: 2rem;
-      }
-
-      .charm {
-        width: 106px;
-        height: 152px;
-        margin-left: -53px;
-      }
-
-      .face {
-        padding: 0.7rem;
-        border-radius: 14px;
-      }
-
-      .drawing {
-        width: 3.75rem;
-        height: 3.75rem;
-      }
-
-      .back-message {
-        font-size: 0.7rem;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .charm {
-        animation: none;
-      }
-
-      .flipper {
-        transition: none;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0a0204" />
+  <title>6 Cartas ✨</title>
+  <link rel="preconnect" href__="https://fonts.googleapis.com" />
+  <link rel="preconnect" href__="https://fonts.gstatic.com" crossorigin />
+  <link href__="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href__="style.css" />
 </head>
-
 <body>
-  <main class="game-page">
-    <h1 class="game-title">Leque dos Chavecos</h1>
+  <!-- Partículas de fundo -->
+  <div class="particles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+  <div class="glow-bg" aria-hidden="true"></div>
 
-    <p class="game-subtitle">
-      Escolha uma carta
-      <span class="subtitle-flame" id="subtitleFlame"></span>
-    </p>
+  <!-- Controle de navegação somente com CSS -->
+  <input type="radio" name="nav" id="home" checked />
+  <input type="radio" name="nav" id="card1" />
+  <input type="radio" name="nav" id="card2" />
+  <input type="radio" name="nav" id="card3" />
+  <input type="radio" name="nav" id="card4" />
+  <input type="radio" name="nav" id="card5" />
+  <input type="radio" name="nav" id="card6" />
 
-    <div class="fan" id="fan"></div>
+  <main class="stage">
 
-    <div class="game-footer">
-      <span class="game-count" id="count" aria-live="polite"></span>
-    </div>
+    <!-- TELA PRINCIPAL: LEQUE DE CARTAS -->
+    <section class="screen cards-screen">
+      <h1 class="title">ESCOLHA UMA CARTA <span class="spark">✨</span></h1>
+      <p class="subtitle">Toque em uma carta e descubra o que ela esconde</p>
+
+      <div class="fan">
+        <label for="card1" class="card card--blue" style="--rot:-26deg;--z:1">
+          <span class="card-symbol">♡</span>
+          <span class="card-edge"></span>
+        </label>
+        <label for="card2" class="card card--cyan" style="--rot:-15deg;--z:2">
+          <span class="card-symbol">✦</span>
+          <span class="card-edge"></span>
+        </label>
+        <label for="card3" class="card card--red" style="--rot:-5deg;--z:3">
+          <span class="card-symbol">♥</span>
+          <span class="card-edge"></span>
+        </label>
+        <label for="card4" class="card card--purple" style="--rot:5deg;--z:4">
+          <span class="card-symbol">💋</span>
+          <span class="card-edge"></span>
+        </label>
+        <label for="card5" class="card card--pink" style="--rot:15deg;--z:3">
+          <span class="card-symbol">✨</span>
+          <span class="card-edge"></span>
+        </label>
+        <label for="card6" class="card card--violet" style="--rot:26deg;--z:2">
+          <span class="card-symbol">♡</span>
+          <span class="card-edge"></span>
+        </label>
+      </div>
+
+      <p class="hint">6 cartas · 6 segredos</p>
+    </section>
+
+    <!-- TELAS DE CONTEÚDO DAS CARTAS -->
+    <section class="screen content-screen content-1">
+      <div class="content-card">
+        <span class="tag">SURPRESA ✨</span>
+        <h2 class="content-title">Cuidado...</h2>
+        <p class="content-msg">Se eu te convidasse para sair comigo hoje, você aceitaria ou faria charme primeiro? 👀</p>
+        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
+        <label for="home" class="back">← Voltar às cartas</label>
+      </div>
+    </section>
+
+    <section class="screen content-screen content-2">
+      <div class="content-card">
+        <span class="tag">SURPRESA ✨</span>
+        <h2 class="content-title">Cuidado...</h2>
+        <p class="content-msg">Qual seria o lugar perfeito para um encontro comigo?</p>
+        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
+        <label for="home" class="back">← Voltar às cartas</label>
+      </div>
+    </section>
+
+    <section class="screen content-screen content-3">
+      <div class="content-card">
+        <span class="tag">SURPRESA ✨</span>
+        <h2 class="content-title">Cuidado...</h2>
+        <p class="content-msg">Se pudesse escolher uma coisa para fazer comigo agora, o que seria?</p>
+        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
+        <label for="home" class="back">← Voltar às cartas</label>
+      </div>
+    </section>
+
+    <section class="screen content-screen content-4">
+      <div class="content-card">
+        <span class="tag">SURPRESA ✨</span>
+        <h2 class="content-title">Cuidado...</h2>
+        <p class="content-msg">Qual foi a primeira coisa que você reparou em mim?</p>
+        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
+        <label for="home" class="back">← Voltar às cartas</label>
+      </div>
+    </section>
+
+    <section class="screen content-screen content-5">
+      <div class="content-card">
+        <span class="tag">SURPRESA ✨</span>
+        <h2 class="content-title">Cuidado...</h2>
+        <p class="content-msg">De 0 a 10, qual a chance de você aceitar um beijo meu? 💋</p>
+        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
+        <label for="home" class="back">← Voltar às cartas</label>
+      </div>
+    </section>
+
+    <section class="screen content-screen content-6">
+      <div class="content-card">
+        <span class="tag">SURPRESA ✨</span>
+        <h2 class="content-title">Cuidado...</h2>
+        <p class="content-msg">Se eu dissesse que estou com vontade de te ver agora... o que você responderia? ❤️</p>
+        <a class="wa-btn" href__="https://wa.me/" target="_blank" rel="noopener">💬 Enviar no WhatsApp</a>
+        <label for="home" class="back">← Voltar às cartas</label>
+      </div>
+    </section>
+
   </main>
-
-  <script>
-    const ILLUSTRATIONS = {
-      glance: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <path class="icon-fill-soft" d="M12 49c10-17 24-25 36-25s26 8 36 25c-10 15-24 23-36 23S22 64 12 49Z"/>
-          <path class="icon-line" d="M12 49c10-17 24-25 36-25s26 8 36 25c-10 15-24 23-36 23S22 64 12 49Z"/>
-          <circle class="icon-fill" cx="48" cy="48" r="13"/>
-          <circle class="icon-cutout" cx="53" cy="43" r="4"/>
-          <path class="icon-line" d="M24 22c8-6 16-8 23-7M60 16c6 1 11 3 15 7"/>
-        </svg>
-      `,
-
-      kiss: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <path class="icon-fill-soft" d="M48 72C36 62 22 57 20 45c-2-11 8-20 20-13l8 6 8-6c12-7 22 2 20 13-2 12-16 17-28 27Z"/>
-          <path class="icon-line" d="M48 72C36 62 22 57 20 45c-2-11 8-20 20-13l8 6 8-6c12-7 22 2 20 13-2 12-16 17-28 27Z"/>
-          <path class="icon-fill" d="M26 52c7-2 12-6 22-4 10-2 15 2 22 4-6 11-14 17-22 17s-16-6-22-17Z"/>
-          <path class="icon-cutout-line" d="M32 54h32"/>
-          <path class="icon-line" d="M70 22l3-8m4 12 7-4"/>
-        </svg>
-      `,
-
-      "arrow-heart": `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <path class="icon-fill-soft" d="M46 77C31 65 16 55 17 39c1-16 20-21 29-8 9-13 28-8 29 8 1 16-14 26-29 38Z"/>
-          <path class="icon-line" d="M46 77C31 65 16 55 17 39c1-16 20-21 29-8 9-13 28-8 29 8 1 16-14 26-29 38Z"/>
-          <path class="icon-line icon-line-bold" d="M14 75 79 22"/>
-          <path class="icon-fill" d="m73 18 13-5-5 13-3-5-5-3Z"/>
-          <path class="icon-fill" d="m20 70-10 3 7 7 2-4 5-1Z"/>
-        </svg>
-      `,
-
-      lovestruck: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <circle class="icon-fill-soft icon-line" cx="48" cy="51" r="31"/>
-          <path class="icon-fill" d="M19 24c0-9 11-12 16-5 5-7 16-4 16 5 0 8-8 13-16 19-8-6-16-11-16-19Zm42 0c0-9 11-12 16-5 5-7 16-4 16 5 0 8-8 13-16 19-8-6-16-11-16-19Z"/>
-          <path class="icon-line" d="M35 62c8 7 18 7 26 0"/>
-          <path class="icon-line" d="M46 47c1 3 1 6-1 8"/>
-        </svg>
-      `,
-
-      wink: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <circle class="icon-fill-soft icon-line" cx="48" cy="48" r="32"/>
-          <circle class="icon-fill" cx="35" cy="42" r="4"/>
-          <path class="icon-line icon-line-bold" d="M57 43c5-4 10-4 15 0"/>
-          <path class="icon-line" d="M32 61c9 7 21 7 31-1"/>
-          <path class="icon-fill" d="M76 63c8-5 14 5 7 11-4 4-9 6-14 9 2-6 3-11 7-20Z"/>
-        </svg>
-      `,
-
-      flame: `
-        <svg viewBox="0 0 96 96" aria-hidden="true">
-          <path class="icon-fill-soft" d="M52 10c3 15-10 21-5 35 4-6 9-10 14-13 11 12 17 23 12 36-5 14-17 20-28 18-14-2-24-12-24-25 0-12 7-22 18-31-1 11 2 17 7 20-2-17 8-27 6-40Z"/>
-          <path class="icon-line" d="M52 10c3 15-10 21-5 35 4-6 9-10 14-13 11 12 17 23 12 36-5 14-17 20-28 18-14-2-24-12-24-25 0-12 7-22 18-31-1 11 2 17 7 20-2-17 8-27 6-40Z"/>
-          <path class="icon-fill" d="M48 48c7 9 11 16 8 24-2 6-7 10-13 9-7-1-12-6-12-13 0-6 4-12 10-17 0 6 2 9 5 11-1-6 0-10 2-14Z"/>
-        </svg>
-      `
-    };
-
-    const CARDS = [
-      {
-        illustration: "glance",
-        message: "Se você sorrisse agora, eu perdia a linha do pensamento."
-      },
-      {
-        illustration: "kiss",
-        message: "Se beijo valesse ponto, essa carta já era sua."
-      },
-      {
-        illustration: "arrow-heart",
-        message: "Aviso: olhar assim demais pode causar paixão."
-      },
-      {
-        illustration: "lovestruck",
-        message: "Alguém aqui anda roubando meu sossego… e eu deixo."
-      },
-      {
-        illustration: "wink",
-        message: "Essa piscadela é reservada a quem achou a carta primeiro."
-      },
-      {
-        illustration: "flame",
-        message: "Nem o foguinho descreve o clima que você causa."
-      }
-    ];
-
-    const FAN_ANGLE = 14;
-    const fan = document.getElementById("fan");
-    const count = document.getElementById("count");
-    const subtitleFlame = document.getElementById("subtitleFlame");
-    const flipped = CARDS.map(() => false);
-
-    subtitleFlame.innerHTML = ILLUSTRATIONS.flame;
-
-    function updateCount() {
-      const revealed = flipped.filter(Boolean).length;
-      count.textContent =
-        revealed + " de " + CARDS.length + " recadinhos revelados";
-    }
-
-    CARDS.forEach((card, position) => {
-      const button = document.createElement("button");
-      const angle =
-        (position - (CARDS.length - 1) / 2) * FAN_ANGLE;
-
-      button.type = "button";
-      button.className = "charm charm-face-" + (position + 1);
-      button.style.setProperty("--angle", angle + "deg");
-      button.style.setProperty("--i", position);
-      button.setAttribute("aria-label", "Virar carta " + (position + 1));
-
-      button.innerHTML = `
-        <span class="flipper">
-          <span class="face face-front" aria-hidden="true">
-            <span class="drawing">
-              ${ILLUSTRATIONS[card.illustration]}
-            </span>
-          </span>
-
-          <span class="face face-back">
-            <span class="back-message">${card.message}</span>
-          </span>
-        </span>
-      `;
-
-      button.addEventListener("click", () => {
-        flipped[position] = !flipped[position];
-
-        const flipper = button.querySelector(".flipper");
-        flipper.classList.toggle("is-flipped", flipped[position]);
-
-        button.setAttribute(
-          "aria-label",
-          flipped[position]
-            ? "Carta virada: " + card.message
-            : "Virar carta " + (position + 1)
-        );
-
-        updateCount();
-      });
-
-      fan.appendChild(button);
-    });
-
-    updateCount();
-  </script>
 </body>
 </html>
